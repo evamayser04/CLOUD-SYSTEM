@@ -3,33 +3,31 @@ package com.ejemplo;
 public class FogNode {
 
     private CloudServer cloudServer;
+    private int id;
     private int contadorAltas = 0;
 
-    public FogNode(CloudServer cloudServer) {
+    public FogNode(CloudServer cloudServer, int id) {
         this.cloudServer = cloudServer;
+        this.id = id;
     }
 
-    // devuelve false cuando llega a 20 altas
-    public boolean procesarDato(SensorData dato) {
+    public boolean procesarDato(SensorData dato, int edgeId) {
 
-        System.out.println("Fog recibe: " + dato);
+        System.out.println("Fog " + id +
+                " recibe de Edge " + edgeId +
+                " -> " + dato);
 
         if (dato.getTemperatura() > 30) {
             contadorAltas++;
-            System.out.println("⚠️ Temperatura ALTA (" + contadorAltas + "/20)");
+            System.out.println("⚠️ Fog " + id + " temperatura ALTA (" + contadorAltas + ")");
         }
 
         cloudServer.guardarDato(dato);
 
-        if (contadorAltas >= 20) {
-            System.out.println("\n🚨 Se han alcanzado 20 temperaturas altas. PARANDO SISTEMA.");
-            return false;
-        }
-
-        return true;
+        return true; // no se detiene globalmente en esta versión
     }
 
-    public int getContadorAltas() {
-        return contadorAltas;
+    public int getId() {
+        return id;
     }
 }

@@ -4,30 +4,28 @@ import java.util.Random;
 public class EdgeNode {
 
     private FogNode fogNode;
+    private int id;
+    private int fogId;
+    private Random random = new Random();
 
-    public EdgeNode(FogNode fogNode) {
+    public EdgeNode(FogNode fogNode, int fogId, int id) {
         this.fogNode = fogNode;
+        this.fogId = fogId;
+        this.id = id;
     }
 
-    public void enviarDatos() {
+    public void enviarDato() {
 
-        Random random = new Random();
-        int i = 0;
+        double temp = 20 + (40 - 20) * random.nextDouble();
 
-        while (true) {
+        SensorData dato = new SensorData(
+                "Fog-" + fogId + "-Edge-" + id,
+                temp
+        );
 
-            double temp = 20 + (40 - 20) * random.nextDouble();
-            SensorData dato = new SensorData("Sensor-" + i, temp);
+        System.out.println("Edge " + id +
+                " (Fog " + fogId + ") -> " + temp);
 
-            System.out.println("\nEdge envía: " + dato);
-
-            boolean continuar = fogNode.procesarDato(dato);
-
-            if (!continuar) {
-                break;
-            }
-
-            i++;
-        }
+        fogNode.procesarDato(dato, id);
     }
 }
