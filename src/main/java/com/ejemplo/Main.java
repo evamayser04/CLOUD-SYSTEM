@@ -8,8 +8,10 @@ public class Main {
         FogNode fog = new FogNode(cloud);
         EdgeNode edge = new EdgeNode(fog);
 
-        edge.enviarDatos(5);
+        edge.enviarDatos();
 
         cloud.mostrarResumen();
+
+        System.out.println("\nTotal temperaturas altas: " + fog.getContadorAltas());
     }
 }

@@ -9,16 +9,25 @@ public class EdgeNode {
         this.fogNode = fogNode;
     }
 
-    public void enviarDatos(int cantidad) {
-        Random random = new Random();
+    public void enviarDatos() {
 
-        for (int i = 0; i < cantidad; i++) {
+        Random random = new Random();
+        int i = 0;
+
+        while (true) {
+
             double temp = 20 + (40 - 20) * random.nextDouble();
             SensorData dato = new SensorData("Sensor-" + i, temp);
 
-            System.out.println("Edge envía: " + dato);
+            System.out.println("\nEdge envía: " + dato);
 
-            fogNode.procesarDato(dato);
+            boolean continuar = fogNode.procesarDato(dato);
+
+            if (!continuar) {
+                break;
+            }
+
+            i++;
         }
     }
 }
