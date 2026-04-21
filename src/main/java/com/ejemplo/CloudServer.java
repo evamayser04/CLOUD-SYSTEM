@@ -15,4 +15,8 @@ public class CloudServer {
             System.out.println(d);
         }
     }
+
+    public void guardarLote(java.util.List<SensorData> lote) {
+    datos.addAll(lote);
+    }
 }
