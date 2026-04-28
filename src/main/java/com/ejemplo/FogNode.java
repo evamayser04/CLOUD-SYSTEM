@@ -25,7 +25,7 @@ public class FogNode {
         // cuando hay 5 datos → enviar al cloud
         if (buffer.size() == 5) {
 
-            System.out.println("📦 Fog " + id + " enviando lote de 5 datos al Cloud...");
+            System.out.println("Fog " + id + " enviando lote de 5 datos al Cloud...");
 
             // SIMULACIÓN DE TIEMPO
             try {
